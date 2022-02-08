@@ -1,10 +1,12 @@
 module Admin
-  class UsersController < ApplicationController
+  class UsersController < BaseController
 
 #   class Admin::UsersController < ApplicationController
 
     before_action :require_authentication
     before_action :set_user!, only: %i[edit update destroy]
+    before_action :authorize_user!
+    after_action :verify_authorized
 
     def index
       respond_to do |format|
@@ -75,6 +77,11 @@ module Admin
         :email, :name, :password, :password_confirmation, :role
       )#.merge(admin_edit: true)
     end
+
+    def authorize_user!
+      authorize(@user || User)
+    end
+    
   end
 
 end

@@ -55,6 +55,7 @@ gem "rubyXL", "~> 3.4"
 gem "activerecord-import", "~> 1.2"
 gem "rails-i18n", "~> 7.0.1"
 gem 'i18n-tasks', '~> 0.9.34'
+gem "pundit", "~> 2.1.1"
 
 
 

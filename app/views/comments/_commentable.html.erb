@@ -1,11 +1,13 @@
 <% is_current_comment = comment&.for?(commentable) %>
+<% comment_builder = is_current_comment ? comment : commentable.comments.build %>
 
 <%= link_to t('questions.show.comments'), "##{html_id}",
   class: 'btn btn-primary', data: {'bs-toggle': 'collapse'} %>
 
 <%= tag.div class: "collapse #{'show' if is_current_comment}", id: html_id do %>
-  <%= form_with model: [commentable,
-    (is_current_comment ? comment : commentable.comments.build)],
+
+  <% if policy(comment_builder).create? %>
+  <%= form_with model: [commentable, comment_builder ],
   class: 'pt-3 border-top my-2' do |f| %>
     <% if is_current_comment %>
       <%= render 'shared/errors', object: @comment %>  
@@ -24,5 +26,6 @@
 
     <%= f.submit t('global.button.submit'), class: 'btn btn-sm btn-primary' %>
   <% end %>
-  <%= render commentable.comments.includes(:user).decorate %>
+  <% end %>
+  <%= render commentable.comments.includes(:user, :commentable).decorate %>
 <% end %>

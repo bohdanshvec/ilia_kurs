@@ -13,17 +13,17 @@
     </div>
 
     <%= f.submit t('.submit'), class: 'btn btn-primary' %> <br class="mb-3">
-    <%= f.submit t('global.button.submit'), class: 'btn btn-primary' %>
   <% end %>
 
 </section>
 
-
-<%= link_to 'New question', new_question_path, class: 'btn btn-primary btn-lg' %>
+<% if policy(:question).new? %>
+  <%= link_to 'New question', new_question_path, class: 'btn btn-primary btn-lg' %>
+<% end %>
 
 <%= paginate(@questions) %>
 
-<%= render @questions %>
+<%= render(@questions) %>
  
 <%= paginate @questions %>
 

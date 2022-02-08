@@ -13,6 +13,8 @@ en:
         body: 'Body'
 
   global:
+    flash:
+      not_authorized: You are not authorized to perform this action!
     user:
       roles:
         basic: Basic
